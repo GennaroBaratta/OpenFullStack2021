@@ -11,9 +11,12 @@ const App = () => {
     "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blod tests when dianosing patients",
   ];
 
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(getRandomInt(anecdotes.length));
   const [votes, setVotes] = useState(anecdotes.map((_) => 0));
-  const mostVotes = Math.max(...votes)
+  const mostVotes = votes.reduce(
+    (iMax, curr, i, arr) => (curr > arr[iMax] ? i : iMax),
+    0
+  );
   //max exclusive
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
